@@ -121,8 +121,9 @@ class Network(object):
             activations.append(activation)
         # backward pass
         #Define la función de costos con respecto a la función sigmoide elegida
-        delta = self.cost_derivative(activations[-1], y) * \
+        delta = (self.cost_derivative(activations[-1], y)/len(activation) )* \
             sigmoid_prime(zs[-1])
+            #Para agregar un cross-entropy, se divide la función de costo entre "n"
         nabla_b[-1] = delta
         nabla_w[-1] = np.dot(delta, activations[-2].transpose())
         #Manda las diferencias a la neurona "anterior", para actualizar los pesos y sesgos
